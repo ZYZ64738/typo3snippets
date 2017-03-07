@@ -1,0 +1,27 @@
+# thx fr34k
+# Some dscription what this spippet is good for ...
+2 = FILES
+2 {
+    references.data = levelmedia:-1,slide
+
+    renderObj = TEXT
+    renderObj {
+        stdWrap {
+            wrap = <img src="|" class="img-responsive" />
+
+            # Overwrite if youtube
+            wrap.override = <div class="youtube"><div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://www.youtube.com/embed/|"></iframe></div></div>
+            wrap.override.if {
+                equals = video/youtube
+                value.data = file:current:mime_type
+            }
+        }
+
+        data = file:current:publicUrl
+        split {
+            token = https://www.youtube.com/watch?v=
+            cObjNum = 1||2
+            1.current = 1
+        }
+    }
+}
